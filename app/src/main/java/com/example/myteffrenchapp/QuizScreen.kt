@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.cupcake.ui
+package com.example.myteffrenchapp
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -27,7 +27,6 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.OutlinedButton
-import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -44,15 +43,11 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.myteffrenchapp.R
+import com.example.myteffrenchapp.data.AppUiState
+import com.example.myteffrenchapp.data.DataSource
 import com.example.myteffrenchapp.ui.theme.MyTEFFrenchAppTheme
 
-/**
- * Composable that displays the list of items as [RadioButton] options,
- * [onSelectionChanged] lambda that notifies the parent composable when a new value is selected,
- * [onCancelButtonClicked] lambda that cancels the order when user clicks cancel and
- * [onNextButtonClicked] lambda that triggers the navigation to next screen
- */
+
 /**
  * Composable that displays word to translate and the translation options
  * as large clickable buttons,
@@ -62,13 +57,16 @@ import com.example.myteffrenchapp.ui.theme.MyTEFFrenchAppTheme
  */
 @Composable
 fun QuizScreen(
-    subtotal: String,
+    uiState: AppUiState,
+    totalScore: Int = uiState.totalScore,
+    questionSetWordPairs: List<Pair<String, String>>,
     options: List<String>,
-    onSelectionChanged: (String) -> Unit = {},
     onCancelButtonClicked: () -> Unit = {},
     onNextButtonClicked: () -> Unit = {},
     modifier: Modifier = Modifier
 ) {
+    var currentScore = uiState.currentScore
+    var answerWordPair = { DataSource.testOptions.random() }
     var selectedValue by rememberSaveable { mutableStateOf("") }
 
     Column(
@@ -236,8 +234,9 @@ fun TwoByTwoGrid(
 fun QuizScreenPreview() {
     MyTEFFrenchAppTheme {
         QuizScreen(
-            subtotal = "299.99",
-            options = listOf("Answer A", "Answer B", "Answer C", "Answer D"),
+            uiState = AppUiState(),
+            questionSetWordPairs = listOf(Pair("Answer A1", "Answer A2"), Pair("Answer B1","Answer B2")),
+            options = listOf("Answer A", "Answer B", "Answer C"),
             modifier = Modifier.fillMaxHeight()
         )
     }

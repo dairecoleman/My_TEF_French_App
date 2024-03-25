@@ -26,7 +26,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.cupcake.ui.QuizScreen
+import com.example.myteffrenchapp.data.AppUiState
 import com.example.myteffrenchapp.data.DataSource
 import com.example.myteffrenchapp.ui.ResultsScreen
 import com.example.myteffrenchapp.ui.theme.AppViewModel
@@ -88,7 +88,7 @@ fun MyTEFFrenchApp(
         ){
             composable(route = MyTEFFrenchAppScreen.Start.name) {
                 StartScreen(
-                    testOptions = DataSource.testOptions,
+                    //testOptions = DataSource.testOptions,
                     onNextButtonClicked = {
                         viewModel.setQuantity(it)
                         navController.navigate(MyTEFFrenchAppScreen.Quiz.name)
@@ -101,11 +101,13 @@ fun MyTEFFrenchApp(
             composable(route = MyTEFFrenchAppScreen.Quiz.name) {
                 val context = LocalContext.current
                 QuizScreen(
-                    subtotal = uiState.price,
+                    uiState= AppUiState(),
+                    totalScore = uiState.totalScore,
+                    questionSetWordPairs =  DataSource.testOptions,
                     onNextButtonClicked = { navController.navigate(MyTEFFrenchAppScreen.Results.name) },
                     onCancelButtonClicked = { cancelOrderAndNavigateToStart(viewModel, navController) },
                     options = DataSource.flavors.map { id -> context.resources.getString(id) },
-                    onSelectionChanged = { viewModel.setFlavor(it) },
+                    //onSelectionChanged = { viewModel.setFlavor(it) },
                     modifier = Modifier.fillMaxHeight()
                 )
             }

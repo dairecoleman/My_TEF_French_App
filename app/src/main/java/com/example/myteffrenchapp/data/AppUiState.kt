@@ -11,8 +11,12 @@ data class AppUiState(
     val flavor: String = "",
     /** Selected date for pickup (such as "Jan 1") */
     val date: String = "",
-    /** Total price for the order */
-    val price: String = "",
+    /** Word Pair to be translated */
+    val answerWordPair: Pair<String, String> = Pair("", ""),
     /** Available pickup dates for the order*/
-    val pickupOptions: List<String> = listOf()
+    val pickupOptions: List<String> = listOf(),
+    /** Total score for this quiz i.e. questions/translations in quiz set */
+    val totalScore: Int = 0,
+    /** Correct answers so far in this quiz*/
+    val currentScore: Int = 0
 )

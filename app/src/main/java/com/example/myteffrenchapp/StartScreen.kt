@@ -22,8 +22,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.myteffrenchapp.data.DataSource
-import com.example.myteffrenchapp.data.DataSource.Options
+import com.example.myteffrenchapp.data.DataSource.test_type_options
 import com.example.myteffrenchapp.ui.theme.MyTEFFrenchAppTheme
 
 //import com.example.cupcake.R
@@ -37,7 +36,6 @@ import com.example.myteffrenchapp.ui.theme.MyTEFFrenchAppTheme
  */
 @Composable
 fun StartScreen(
-    testOptions: List<Pair<Int, Int>>,
     onNextButtonClicked: (Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -70,7 +68,7 @@ fun StartScreen(
                 dimensionResource(id = R.dimen.padding_medium)
             )
         ) {
-            Options.forEach { item ->
+            test_type_options.forEach { item ->
                 SelectTestButton(
                     labelResourceId = item.first,
                     onClick = {onNextButtonClicked(item.second)}
@@ -98,12 +96,12 @@ fun SelectTestButton(
     }
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 fun StartAppPreview() {
     MyTEFFrenchAppTheme {
         StartScreen(
-            testOptions = DataSource.testOptions,
+            //testOptions = DataSource.testOptions,
             onNextButtonClicked = {},
             modifier = Modifier
                 .fillMaxSize()
