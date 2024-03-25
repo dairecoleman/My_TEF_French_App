@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">My TEF French App</string>
+    <string name="back_button">Back</string>
+    <string name="one">One</string>
+    <string name="two">Two</string>
+    <string name="three">Three</string>
+    <string name="four">Four</string>
+    <string name="test_vocab">Test Vocabulary</string>
+    <string name="welcome_message">TEF Canada French Vocab App</string>
+    <string name="vanilla">Vanilla</string>
+    <string name="chocolate">Choc</string>
+    <string name="cancel">Cancel</string>
+    <string name="next">Next</string>
+    <string name="subtotal_price">Subtol price</string>
+    <string name="order_details">Orderdeets</string>
+    <string name="new_cupcake_order">New order</string>
+    <string name="quantity">qt</string>
+    <string name="flavor">flav</string>
+    <string name="pickup_date">pudate</string>
+    <string name="send">Send</string>
+    <string name="first_vocab_set">First Set of Vocab</string>
+    <plurals name="cupcakes">
+        <item quantity="one">%d cupcake</item>
+        <item quantity="other">%d cupcakes</item>
+    </plurals>
+</resources>
