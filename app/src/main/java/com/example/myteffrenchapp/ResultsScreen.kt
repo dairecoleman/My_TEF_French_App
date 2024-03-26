@@ -93,7 +93,7 @@ fun ResultsScreen(
             }
             Spacer(modifier = Modifier.height(dimensionResource(R.dimen.padding_small)))
             FormattedPriceLabel(
-                subtotal = orderUiState.price,
+                subtotal = "empty string",
                 modifier = Modifier.align(Alignment.End)
             )
         }
@@ -125,7 +125,7 @@ fun ResultsScreen(
 fun OrderSummaryPreview() {
     MyTEFFrenchAppTheme {
         ResultsScreen(
-            orderUiState = AppUiState(12, "Test", "Test", "$300.00"),
+            orderUiState = AppUiState(12, "Test", "Test", Pair("Answer B1","Answer B2")),
             onSendButtonClicked = { subject: String, summary: String -> },
             onCancelButtonClicked = {},
             modifier = Modifier.fillMaxHeight()

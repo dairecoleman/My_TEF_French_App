@@ -52,7 +52,7 @@ class AppViewModel : ViewModel() {
         _uiState.update { currentState ->
             currentState.copy(
                 quantity = numberCupcakes,
-                price = calculatePrice(quantity = numberCupcakes)
+                //price = calculatePrice(quantity = numberCupcakes)
             )
         }
     }
@@ -74,7 +74,7 @@ class AppViewModel : ViewModel() {
         _uiState.update { currentState ->
             currentState.copy(
                 date = pickupDate,
-                price = calculatePrice(pickupDate = pickupDate)
+                //price = calculatePrice(pickupDate = pickupDate)
             )
         }
     }

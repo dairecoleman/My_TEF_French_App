@@ -106,7 +106,7 @@ fun MyTEFFrenchApp(
                     questionSetWordPairs =  DataSource.testOptions,
                     onNextButtonClicked = { navController.navigate(MyTEFFrenchAppScreen.Results.name) },
                     onCancelButtonClicked = { cancelOrderAndNavigateToStart(viewModel, navController) },
-                    options = DataSource.flavors.map { id -> context.resources.getString(id) },
+                    //options = DataSource.flavors.map { id -> context.resources.getString(id) },
                     //onSelectionChanged = { viewModel.setFlavor(it) },
                     modifier = Modifier.fillMaxHeight()
                 )

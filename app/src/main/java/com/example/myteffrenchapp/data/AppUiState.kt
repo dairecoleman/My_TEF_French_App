@@ -18,5 +18,7 @@ data class AppUiState(
     /** Total score for this quiz i.e. questions/translations in quiz set */
     val totalScore: Int = 0,
     /** Correct answers so far in this quiz*/
-    val currentScore: Int = 0
+    val currentScore: Int = 0,
+    /** price cupcake str*/
+    val subtotal: String = "subtotalNotApplicable"
 )

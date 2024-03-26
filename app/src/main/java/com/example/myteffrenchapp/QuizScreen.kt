@@ -15,15 +15,17 @@
  */
 package com.example.myteffrenchapp
 
+
+
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.OutlinedButton
@@ -60,41 +62,55 @@ fun QuizScreen(
     uiState: AppUiState,
     totalScore: Int = uiState.totalScore,
     questionSetWordPairs: List<Pair<String, String>>,
-    options: List<String>,
     onCancelButtonClicked: () -> Unit = {},
     onNextButtonClicked: () -> Unit = {},
     modifier: Modifier = Modifier
 ) {
+
+    val answerWordPair = questionSetWordPairs.random()
+    val optionsWordPairs = questionSetWordPairs.toMutableList().shuffled()
+    val buttonTexts = mutableListOf<String>()
+    for (pair in optionsWordPairs) {
+        buttonTexts.add(pair.second)
+    }
+
     var currentScore = uiState.currentScore
-    var answerWordPair = { DataSource.testOptions.random() }
     var selectedValue by rememberSaveable { mutableStateOf("") }
+
 
     Column(
         modifier = modifier,
         verticalArrangement = Arrangement.SpaceBetween
     ) {
         Surface(
-            modifier = Modifier.padding(dimensionResource(R.dimen.padding_medium))
-                .height(150.dp)
-                .width(300.dp)
+            modifier = Modifier
+                .padding(dimensionResource(R.dimen.padding_medium))
+                .size(300.dp, 150.dp)
                 .fillMaxSize()
                 .align(alignment = Alignment.CenterHorizontally),
-            color = Color.Magenta,
+            color = Color(0, 38, 84),
             shape = RoundedCornerShape(20.dp)
-
-        ) {
-            Text(
-                text = "Translate!",
-                fontSize = 48.sp,
-                textAlign = TextAlign.Center
-            )
+        )
+        {
+            Box(
+                modifier = Modifier.fillMaxSize(),
+                contentAlignment = Alignment.Center
+            ) {
+                Text(
+                    text = answerWordPair.first,
+                    fontSize = 30.sp,
+                    textAlign = TextAlign.Center,
+                    color = Color(255, 255, 255)
+                )
+            }
         }
 
         TwoByTwoGrid(
-                button1Text = "Button 1",
-                button2Text = "Button 2",
-                button3Text = "Button 3",
-                button4Text = "Button 4",
+                button1Text = buttonTexts[0],
+                button2Text = buttonTexts[1],
+                button3Text = buttonTexts[2],
+                button4Text = buttonTexts[3],
+
                 onButton1Click = { /* Handle button 1 click */ },
                 onButton2Click = { /* Handle button 2 click */ },
                 onButton3Click = { /* Handle button 3 click */ },
@@ -194,14 +210,18 @@ fun TwoByTwoGrid(
         ) {
             Button(
                 onClick = onButton1Click,
-                modifier = Modifier.weight(1f).padding(4.dp)
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(4.dp)
             ) {
                 Text(text = button1Text)
             }
 
             Button(
                 onClick = onButton2Click,
-                modifier = Modifier.weight(1f).padding(4.dp)
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(4.dp)
             ) {
                 Text(text = button2Text)
             }
@@ -214,14 +234,18 @@ fun TwoByTwoGrid(
         ) {
             Button(
                 onClick = onButton3Click,
-                modifier = Modifier.weight(1f).padding(4.dp)
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(4.dp)
             ) {
                 Text(text = button3Text)
             }
 
             Button(
                 onClick = onButton4Click,
-                modifier = Modifier.weight(1f).padding(4.dp)
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(4.dp)
             ) {
                 Text(text = button4Text)
             }
@@ -235,8 +259,7 @@ fun QuizScreenPreview() {
     MyTEFFrenchAppTheme {
         QuizScreen(
             uiState = AppUiState(),
-            questionSetWordPairs = listOf(Pair("Answer A1", "Answer A2"), Pair("Answer B1","Answer B2")),
-            options = listOf("Answer A", "Answer B", "Answer C"),
+            questionSetWordPairs = DataSource.testOptions,
             modifier = Modifier.fillMaxHeight()
         )
     }
